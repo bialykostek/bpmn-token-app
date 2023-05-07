@@ -17,7 +17,7 @@ import fileOpen from 'file-open';
 
 import download from 'downloadjs';
 
-import exampleXML from '../resources/example.bpmn';
+import exampleXML from '../diagrams/empty.bpmn';
 
 const url = new URL(window.location.href);
 
@@ -26,6 +26,7 @@ const active = url.searchParams.has('e');
 const presentationMode = url.searchParams.has('pm');
 
 let fileName = 'diagram.bpmn';
+let currentFile = "error.bpmn";
 
 const initialDiagram = (() => {
   try {
@@ -151,7 +152,25 @@ document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFil
 function downloadDiagram() {
   modeler.saveXML({ format: true }, function(err, xml) {
     if (!err) {
+      console.log(xml);
       download(xml, fileName, 'application/xml');
+    }
+  });
+}
+
+function saveDiagram() {
+  modeler.saveXML({ format: true }, function(err, xml) {
+    if (!err) {
+      fetch("http://modelowanie.jkostecki.pl/saver.php", {
+        method: "POST",
+        body: JSON.stringify({
+          filename: currentFile,
+          data: xml
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        }        
+      });
     }
   });
 }
@@ -172,6 +191,10 @@ document.body.addEventListener('keydown', function(event) {
 
 document.querySelector('#download-button').addEventListener('click', function(event) {
   downloadDiagram();
+});
+
+document.querySelector('#save-button').addEventListener('click', function(event) {
+  saveDiagram();
 });
 
 
@@ -227,7 +250,8 @@ propertiesPanelResizer.addEventListener('drag', function(event) {
 const remoteDiagram = url.searchParams.get('diagram');
 
 if (remoteDiagram) {
-  fetch(remoteDiagram).then(
+  currentFile = url.searchParams.get('diagram');
+  fetch("diagrams/"+remoteDiagram).then(
     r => {
       if (r.ok) {
         return r.text();
@@ -240,11 +264,12 @@ if (remoteDiagram) {
   ).catch(
     err => {
       showMessage('error', `Failed to open remote diagram: ${err.message}`);
-
+      
       openDiagram(initialDiagram);
     }
   );
 } else {
+  currentFile = url.searchParams.get('file');
   openDiagram(initialDiagram);
 }
 
