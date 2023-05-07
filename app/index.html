@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://bpmn-io.github.io/bpmn-js-token-simulation/index.html" />
   <meta property="og:description" content="Simulate your BPMN diagrams with bpmn-js-token-simulation. Understand and learn BPMN execution semantics one token at a time." />
   <meta property="og:image" content="https://bpmn-io.github.io/bpmn-js-token-simulation/screenshot.png" />
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style>
     html,
     body {
@@ -52,5 +52,31 @@
   <p style="margin-top: 3em">
     <a class="link" href="viewer.html">Open Viewer</a> or <a class="link" href="modeler.html">Open Modeler</a>
   </p>
+
+  <div id="fileList">
+
+  </div>
+
+  
+  <script>
+  
+  async function logJSONData() {
+    $.get("http://modelowanie.jkostecki.pl/getFileList.php", function(data, status){
+      data.forEach((val, ind) => {
+        $('#fileList').append("<p>"+val+"</p>")
+      });
+    });
+    
+  }
+
+  $(document).ready(_ => {
+    logJSONData();
+  });
+
+  
+  document.ready(_ =>{
+
+   });   
+    </script>
 </body>
 </html>
