@@ -134,7 +134,7 @@ document.body.addEventListener('keydown', function(event) {
 const remoteDiagram = url.searchParams.get('diagram');
 
 if (remoteDiagram) {
-  fetch(remoteDiagram).then(
+  fetch("http://modelowanie.jkostecki.pl/diagrams/"+remoteDiagram, {cache: "no-store"}).then(
     r => {
       if (r.ok) {
         return r.text();

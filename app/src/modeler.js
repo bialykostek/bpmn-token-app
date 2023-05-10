@@ -251,7 +251,7 @@ const remoteDiagram = url.searchParams.get('diagram');
 
 if (remoteDiagram) {
   currentFile = url.searchParams.get('diagram');
-  fetch("diagrams/"+remoteDiagram).then(
+  fetch("http://modelowanie.jkostecki.pl/diagrams/"+remoteDiagram, {cache: "no-store"}).then(
     r => {
       if (r.ok) {
         return r.text();
