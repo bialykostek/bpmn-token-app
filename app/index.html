@@ -93,6 +93,7 @@
         <th>File</th>
         <th class="collapsing">View</th>
         <th class="collapsing">Modify</th>
+        <th class="collapsing">Delete</th>
       </tr>
     </thead>
     <tbody id="fileList">
@@ -116,7 +117,13 @@
         <td>`+val+`</td>
         <td class="collapsing"><a href="viewer.html?diagram=`+val+`"><button class="ui button">Viewer</button></a></td>
         <td class="collapsing"><a href="modeler.html?diagram=`+val+`"><button class="ui button">Modeler</button></td>
-      </tr>`)
+        <td class="collapsing"><button class="ui button delete-button">Delete</button></td>
+      </tr>`);
+
+        $('.delete-button').on('click', function() {
+          var row = $(this).closest('tr');
+          row.remove();
+        });
       });
     });
 
