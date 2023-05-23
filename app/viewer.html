@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
 
@@ -18,9 +19,29 @@
   <meta property="og:site_name" content="bpmn-js-token-simulation demo" />
   <meta property="og:title" content="Viewer | BPMN Token Simulation Demo" />
   <meta property="og:url" content="https://bpmn-io.github.io/bpmn-js-token-simulation/viewer.html" />
-  <meta property="og:description" content="Simulate your BPMN diagrams with bpmn-js-token-simulation. Understand and learn BPMN execution semantics one token at a time." />
+  <meta property="og:description"
+    content="Simulate your BPMN diagrams with bpmn-js-token-simulation. Understand and learn BPMN execution semantics one token at a time." />
   <meta property="og:image" content="https://bpmn-io.github.io/bpmn-js-token-simulation/screenshot.png" />
+  <style>
+    .token-counter {
+      background-color: #2330a5;
+      border-radius: 100%;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      user-select: none;
+      animation-timing-function: ease;
+      position: relative;
+      top: 0;
+      display: inline-block;
+    }
+  </style>
+
 </head>
+
 <body>
   <div class="canvas-parent">
     <div class="canvas" id="canvas">
@@ -29,4 +50,5 @@
 
   <script src="./dist/viewer.js"></script>
 </body>
+
 </html>

@@ -133,9 +133,9 @@ function openDiagram(diagram) {
           visited[val.id] = [];
       })
 
-      setInterval(_ => {
-        console.log(visited)
-      }, 1000)
+      //setInterval(_ => {
+      //  console.log(visited)
+      //}, 1000)
       
 console.log(viewer)
 
@@ -145,6 +145,18 @@ console.log(viewer)
       console.error(err);
     });
 }
+
+/*
+
+<div class="djs-overlay djs-overlay-token-count" data-overlay-id="ov-894347311-38" style="position: absolute; left: 80px; top: -10px; transform-origin: left top;"><div class="bts-token-count-parent">
+      
+    <div data-scope-id="04ugf6p" class="token-counter" style="color: #fff; background: #2287f9">
+      1
+    </div>
+  
+    </div></div>
+    
+*/
 
 
 
