@@ -77,7 +77,6 @@
           <p>The viewer is a component that allows users to observe and analyze the flow of tokens in a Business Process
             Model and Notation (BPMN) diagram. It provides a visual representation of the process execution, displaying
             the movement of tokens through various process elements such as tasks, gateways, and events.</p>
-          <a class="link" href="viewer.html">Open Viewer</a>
         </div>
       </div>
       <div class="section" style="background-color: white;">
@@ -87,7 +86,6 @@
           <p>The modeler is a powerful tool that allows users to create and modify Business Process Model and Notation
             (BPMN) diagrams. It provides a user-friendly interface and a set of features to design and define the
             structure, flow, and behavior of business processes.</p>
-          <a class="link" href="modeler.html">Open Modeler</a>
         </div>
       </div>
     </div>
@@ -124,7 +122,6 @@
       $.get("http://modelowanie.jkostecki.pl/getFileList.php", function (data, status) {
 
         data.forEach((val, ind) => {
-          console.log("xd")
           $('#fileList').append(`<tr>
             <td>` + val + `</td>
             <td class="collapsing"><a href="viewer.html?diagram=` + val + `"><button class="ui button">Viewer</button></a></td>

@@ -89,6 +89,11 @@ var autoInterval;
 var autoOn = false;
 var tokens = 0;
 
+function changeDirection(){
+  document.querySelectorAll('[title="Set Sequence Flow"]')[0].click();
+  setTimeout(changeDirection, Math.random()*2000+1000);
+}
+
 function autoTrigger(){
   if(!autoOn){
     tokens=0;
@@ -98,14 +103,48 @@ function autoTrigger(){
         tokens++;
         if(tokens > document.getElementById('tokens').value) {
           clearInterval(autoInterval);
+          document.getElementById('svgauto').innerHTML = `<path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>`;
           autoOn = false;
         }
       }
     }, 100);
+    setTimeout(changeDirection, Math.random()*2000+1000);
+    
+    setInterval(_ => { 
+      if(!document.querySelectorAll('.bts-context-pad')[28].classList.contains('hidden') && Math.random() < 0.25){
+        document.querySelectorAll('.bts-context-pad')[28].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[11].classList.contains('hidden') && Math.random() < 0.25){
+        document.querySelectorAll('.bts-context-pad')[11].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[14].classList.contains('hidden') && Math.random() < 0.25){
+        document.querySelectorAll('.bts-context-pad')[14].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[15].classList.contains('hidden') && Math.random() < 0.25){
+        document.querySelectorAll('.bts-context-pad')[15].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[16].classList.contains('hidden') && Math.random() < 0.25){
+        document.querySelectorAll('.bts-context-pad')[16].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[35].classList.contains('hidden') && Math.random() < 0.1){
+        document.querySelectorAll('.bts-context-pad')[35].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[33].classList.contains('hidden') && Math.random() < 0.1){
+        document.querySelectorAll('.bts-context-pad')[33].click()
+      }
+      if(!document.querySelectorAll('.bts-context-pad')[34].classList.contains('hidden') && Math.random() < 0.1){
+        document.querySelectorAll('.bts-context-pad')[34].click()
+      }
+    }, 500);
+
+    document.getElementById('svgauto').innerHTML = `<path fill="currentColor" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path>`;
+    
     autoOn = true;
   }else{
     clearInterval(autoInterval);
     autoOn = false;
+    document.getElementById('svgauto').innerHTML = `<path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>`;
+
   }  
 }
 
@@ -122,9 +161,9 @@ function openDiagram(diagram) {
 
       viewer.get('canvas').zoom('fit-viewport');
       document.querySelector('.bts-palette').innerHTML += "<b>Auto simulation</b><br />"
-      document.querySelector('.bts-palette').innerHTML += 'Tokens: <input type="number" id="tokens" style="width: 3em" value=10 /><br />'
-      document.querySelector('.bts-palette').innerHTML += 'Lambda: <input type="number" id="lambda" style="width: 3em" value=5 /><br />'
-      document.querySelector('.bts-palette').innerHTML += '<div class="bts-entry" id="autoTriggerBtn" title="Play/Pause Auto"><span class="bts-icon "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg></span></div>';
+      document.querySelector('.bts-palette').innerHTML += 'Tokens: <input type="number" id="tokens" style="width: 3em" value=30 /><br />'
+      document.querySelector('.bts-palette').innerHTML += 'Lambda: <input type="number" id="lambda" style="width: 3em" value=60 /><br />'
+      document.querySelector('.bts-palette').innerHTML += '<div class="bts-entry" id="autoTriggerBtn" title="Play/Pause Auto"><span class="bts-icon "><svg id="svgauto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg></span></div>';
       document.getElementById('autoTriggerBtn').addEventListener('click', autoTrigger);
       
       var visited = {};
@@ -132,13 +171,6 @@ function openDiagram(diagram) {
           val.id = "block" + ind;
           visited[val.id] = [];
       })
-
-      //setInterval(_ => {
-      //  console.log(visited)
-      //}, 1000)
-      
-console.log(viewer)
-
 
     })
     .catch(err => {
